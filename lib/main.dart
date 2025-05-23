@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reader_tracker/pages/home_page.dart';
+import 'package:reader_tracker/pages/main_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,12 +12,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'A.Reader',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Color(0x00e94d2a)),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: const MainPage(),
     );
   }
 }
