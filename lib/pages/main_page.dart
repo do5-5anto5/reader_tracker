@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class MainPage extends StatefulWidget {
+  const MainPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePage();
+  State<MainPage> createState() => _MainPage();
 }
 
-class _HomePage extends State<HomePage> {
+class _MainPage extends State<MainPage> {
   int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    print('test');
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -21,18 +20,16 @@ class _HomePage extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.save), label: 'Saved'),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorites',),
+          const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          const BottomNavigationBarItem(icon: Icon(Icons.save), label: 'Saved'),
+          const BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorites',),
         ],
         selectedItemColor: Theme.of(context).colorScheme.onPrimary,
         unselectedItemColor: Theme.of(context).colorScheme.onPrimary,
         onTap: (value) {
-          debugPrint('value taped: $value');
           setState(() {
             _currentIndex = value;
           });
-          debugPrint('current index: $_currentIndex');
         },
       ),
     );
