@@ -1,9 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:reader_tracker/network/network.dart';
 import 'package:reader_tracker/pages/saved_screen.dart';
 
-import '../models/book.dart';
 import 'favorites_screen.dart';
 import 'home_screen.dart';
 
@@ -17,30 +14,11 @@ class MainPage extends StatefulWidget {
 class _MainPage extends State<MainPage> {
   int _currentIndex = 0;
 
-  NetWork netWork = NetWork();
-
-  Future<void> _searchBooks(String query) async {
-    try {
-      List<Book> books = await netWork.searchBooks(query);
-      if (kDebugMode) {
-        print('Books: ${books.toString()}');
-      }
-    } catch (e) {
-      throw Exception('Failed getting network response');
-    }
-  }
-
   final List<Widget> _screens = [
     const HomeScreen(),
     const SavedScreen(),
     const FavoriteScreen(),
   ];
-
-  @override
-  void initState() {
-    _searchBooks('android');
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
