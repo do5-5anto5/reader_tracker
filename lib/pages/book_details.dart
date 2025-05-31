@@ -25,6 +25,7 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
           child: Padding(
             padding: EdgeInsets.all(16),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (book.imageLinks.isNotEmpty)
                   Padding(
@@ -35,6 +36,7 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                     ),
                   ),
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       book.title,
@@ -57,6 +59,39 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                     Text(
                       'Language: ${book.language}',
                       style: textTheme.bodySmall,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: const Text('Save'),
+                        ),
+                        ElevatedButton.icon(
+                          onPressed: () {},
+                          icon: Icon(Icons.favorite),
+                          label: const Text('Add to Favorites'),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Text('Description', style: textTheme.titleMedium),
+                    SizedBox(height: 5),
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.primary.withAlpha(150),
+                        ),
+                        borderRadius: BorderRadius.circular(5),
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.inversePrimary.withAlpha(40),
+                      ),
+                      child: Text(book.description),
                     ),
                   ],
                 ),
