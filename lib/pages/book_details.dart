@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../models/book.dart';
+import '../models/book_details_arguments.dart';
+
 class BookDetailsScreen extends StatefulWidget {
   const BookDetailsScreen({super.key});
 
@@ -10,9 +13,12 @@ class BookDetailsScreen extends StatefulWidget {
 class _BookDetailsScreenState extends State<BookDetailsScreen> {
   @override
   Widget build(BuildContext context) {
+    final bookDetailsArguments = ModalRoute.of(context)?.settings.arguments as BookDetailsArguments;
+    final Book book = bookDetailsArguments.itemBook;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Book Details'),
+        title: Text(book.title),
+        // title: const Text('Book Details'),
       ),
     );
   }
