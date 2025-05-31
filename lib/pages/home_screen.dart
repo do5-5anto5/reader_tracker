@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../components/gridview_expanded.dart';
 import '../models/book.dart';
-import '../models/book_details_arguments.dart';
 import '../network/network.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -36,11 +36,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: EdgeInsets.all(12),
+          padding: const EdgeInsets.all(12),
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(bottom: 10),
+                padding: const EdgeInsets.only(bottom: 10),
                 child: TextField(
                   decoration: InputDecoration(
                     hintText: 'Search for a book',
@@ -53,81 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onSubmitted: (query) => _searchBooks(query),
                 ),
               ),
-              Expanded(
-                child: GridView.builder(
-                  itemCount: _books.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.6,
-                  ),
-                  itemBuilder: (context, index) {
-                    Book book = _books[index];
-                    return Container(
-                      decoration: BoxDecoration(
-                        color:
-                            Theme.of(
-                              context,
-                            ).colorScheme.surfaceContainerHighest,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(10),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              '/details',
-                              arguments: BookDetailsArguments(itemBook: book),
-                            );
-                          },
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.all(18),
-                                child: Image.network(
-                                  book.imageLinks['thumbnail'] ?? '',
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(6),
-                                child: Text(
-                                  book.title,
-                                  style: Theme.of(context).textTheme.titleSmall,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(6),
-                                child: Text(
-                                  book.authors.join(', & '),
-                                  style: Theme.of(context).textTheme.bodySmall,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              // Expanded(
-              //   child: SizedBox(
-              //     width: double.infinity,
-              //     child: ListView.builder(
-              //       itemCount: _books.length,
-              //       itemBuilder: (context, index) {
-              //         Book book = _books[index];
-              //         return ListTile(
-              //             title: Text(book.title),
-              //         subtitle: Text(book.authors.join(', & ')));
-              //       },
-              //     ),
-              //   ),
-              // ),
+              GridViewExpanded(books: _books),
             ],
           ),
         ),
