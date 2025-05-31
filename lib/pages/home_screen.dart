@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../models/book.dart';
+import '../models/book_details_arguments.dart';
 import '../network/network.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -73,7 +74,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: EdgeInsets.all(10),
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context, '/details');
+                            Navigator.pushNamed(
+                              context,
+                              '/details',
+                              arguments: BookDetailsArguments(itemBook: book),
+                            );
                           },
                           child: Column(
                             children: [
