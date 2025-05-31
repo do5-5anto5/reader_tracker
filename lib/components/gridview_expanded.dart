@@ -37,46 +37,46 @@ class GridViewExpanded extends StatelessWidget {
                 ).colorScheme.surfaceContainerHighest,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      '/details',
-                      arguments: BookDetailsArguments(itemBook: book),
-                    );
-                  },
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Image.network(
-                          book.imageLinks['thumbnail'] ?? '',
-                        ),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    '/details',
+                    arguments: BookDetailsArguments(itemBook: book),
+                  );
+                },
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(18),
+                      child: Image.network(
+                        book.imageLinks['thumbnail'] ?? '',
+                        scale: 1.2,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 6, left: 6, bottom: 2.8),
-                        child: Text(
-                          book.title,
-                          style:
-                          Theme.of(context).textTheme.titleSmall,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                        ),
+                    ),
+                    Padding(
+                      // padding: const EdgeInsets.only(right: 6, left: 6, bottom: 2.8),
+                      padding: EdgeInsets.all(8),
+                      child: Text(
+                        book.title,
+                        style:
+                        Theme.of(context).textTheme.titleSmall,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 6, left: 6),
-                        child: Text(
-                          book.authors.join(', & '),
-                          style:
-                          Theme.of(context).textTheme.bodySmall,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                        ),
+                    ),
+                    Padding(
+                      // padding: const EdgeInsets.only(right: 6, left: 6),
+                      padding: EdgeInsets.all(8),
+                      child: Text(
+                        book.authors.join(', & '),
+                        style:
+                        Theme.of(context).textTheme.bodySmall,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
