@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'A.Reader',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color(0x00e94d2a)),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color(0x00F18215)),
         useMaterial3: true,
       ),
       initialRoute: '/',
