@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     suffix: Icon(Icons.search),
                     prefixIcon: const Icon(Icons.search),
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
                     ),
                   ),
                   onSubmitted: (query) => _searchBooks(query),
@@ -71,33 +71,38 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       child: Padding(
                         padding: EdgeInsets.all(10),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.all(18),
-                              child: Image.network(
-                                book.imageLinks['thumbnail'] ?? '',
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/details');
+                          },
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.all(18),
+                                child: Image.network(
+                                  book.imageLinks['thumbnail'] ?? '',
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(6),
-                              child: Text(
-                                book.title,
-                                style: Theme.of(context).textTheme.titleSmall,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
+                              Padding(
+                                padding: EdgeInsets.all(6),
+                                child: Text(
+                                  book.title,
+                                  style: Theme.of(context).textTheme.titleSmall,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(6),
-                              child: Text(
-                                book.authors.join(', & '),
-                                style: Theme.of(context).textTheme.bodySmall,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
+                              Padding(
+                                padding: EdgeInsets.all(6),
+                                child: Text(
+                                  book.authors.join(', & '),
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     );
