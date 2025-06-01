@@ -1,9 +1,11 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../models/book.dart';
+
 class DatabaseHelper {
   static const _databaseName = 'books_database.db';
-  static const _databaseVersion = 1;
+  static const _databaseVersion = 2;
   static const _tableName = 'books';
 
   DatabaseHelper._privateConstructor();
@@ -22,7 +24,11 @@ class DatabaseHelper {
   _initDatabase() async {
     //device/data/databaseName.db
     String path = join(await getDatabasesPath(), _databaseName);
-    return await openDatabase(path, version: _databaseVersion, onCreate: _onCreate);
+    return await openDatabase(
+      path,
+      version: _databaseVersion,
+      onCreate: _onCreate,
+    );
   }
 
   Future _onCreate(Database db, int version) async {
@@ -44,5 +50,27 @@ class DatabaseHelper {
     )
     ''');
   }
-}
 
+  Future<int> insertBook(Book book) async {
+    Database db = await instance.database;
+    return await db.insert(_tableName, book.toJson());
+  }
+
+  Future<List<Book>> readAllBooks() async {
+    Database db = await instance.database;
+    var books = await db.query(_tableName);
+    return books.isNotEmpty
+        ? books.map((bookData) => Book.fromJsonDatabase(bookData)).toList()
+        : [];
+  }
+
+  Future<int> toggleFavoriteStatus(String id, bool isFavorite) async {
+    Database db = await instance.database;
+    return await db.update(
+      _tableName,
+      {'favorite': isFavorite ? 1 : 0},
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+}
