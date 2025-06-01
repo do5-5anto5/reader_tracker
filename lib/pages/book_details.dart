@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reader_tracker/db/database_helper.dart';
 
 import '../models/book.dart';
 import '../models/book_details_arguments.dart';
@@ -64,13 +65,26 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            try {
+                              int savedInt=
+                              await DatabaseHelper.instance.insertBook(book);
+                              SnackBar snackBar = SnackBar(
+                                content: Text('Book saved $savedInt'),
+                              );
+                              ScaffoldMessenger.of(
+                                context,
+                              ).showSnackBar(snackBar);
+                            } catch (error) {
+                              throw Exception('Failed to save book, $error');
+                            }
+                          },
                           child: const Text('Save'),
                         ),
                         ElevatedButton.icon(
                           onPressed: () {},
                           icon: Icon(Icons.favorite),
-                          label: const Text('Add to Favorites'),
+                          label: const Text('Favorite'),
                         ),
                       ],
                     ),
@@ -86,12 +100,15 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
                             context,
                           ).colorScheme.primary.withAlpha(150),
                         ),
-                        borderRadius: BorderRadius.circular(5),
+                        borderRadius: BorderRadius.circular(10),
                         color: Theme.of(
                           context,
                         ).colorScheme.inversePrimary.withAlpha(40),
                       ),
-                      child: Text(book.description),
+                      child: Text(
+                        book.description,
+                        textAlign: TextAlign.justify,
+                      ),
                     ),
                   ],
                 ),
