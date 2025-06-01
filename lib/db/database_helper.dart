@@ -73,4 +73,9 @@ class DatabaseHelper {
       whereArgs: [id],
     );
   }
+
+  Future<int> deleteBook(String id) async {
+    Database db = await instance.database;
+    return await db.delete(_tableName, where: 'id = ?', whereArgs: [id]);
+  }
 }

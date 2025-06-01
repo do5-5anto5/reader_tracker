@@ -48,7 +48,12 @@ class _SavedScreenState extends State<SavedScreen> {
                                 book.imageLinks['smallThumbnail'] ?? '',
                                 fit: BoxFit.cover,
                               ),
-                              trailing: Icon(Icons.delete),
+                              trailing: IconButton(
+                                  onPressed: () async {
+                                    DatabaseHelper.instance.deleteBook(book.id);
+                                    _loadBooks();
+                                  },
+                                  icon: const Icon(Icons.delete)),
                               subtitle: Column(
                                 children: [
                                   Text(book.authors.join(', ')),
